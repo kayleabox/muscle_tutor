@@ -1,7 +1,7 @@
 # this program will help the user learn the muscles of the body,
 # their attachments and functions
 import random
-#import menu_functions
+import menu_functions as menu
 
 #create the structure of the quiz
 #generate random questions about the muscles in a certain part of the body
@@ -45,10 +45,10 @@ def main():
     selection = 1
     while play != 'q':
 
-        menu()
+        menu.menu()
         region_to_test = 0
         while region_to_test != QUIT:
-            region_to_test = get_choice()
+            region_to_test = menu.get_choice()
             if region_to_test == HEAD_NECK:
                 muscles = random.sample(head_neck_function.keys(),3)
                 options = head_neck_function[muscles[0]], head_neck_function[muscles[1]], head_neck_function[muscles[2]]
@@ -125,19 +125,6 @@ def main():
                 else:
                     print('choose a valid option')
 
-def menu():
-    print('menu options\n')
-    print('__________________\n')
-    print('1)head and neck\n')
-    print('2)arm and shoulder\n')
-    print('3)hand\n')
-    print('4)thorax and spine\n')
-    print('5)hip\n')
-    print('6)leg\n')
-    print('7)foot\n')
 
-def get_choice():
-    choice = int(input('what part of the body would you like to work on?'))
-    return choice
-
-main()
+if __name__ == '__main__':
+    main()

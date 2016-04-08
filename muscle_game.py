@@ -45,10 +45,10 @@ def main():
     selection = 1
     while play != 'q':
 
-        menu.menu()
+        menu.menu()   # calling function menu() from menu_functions module
         region_to_test = 0
         while region_to_test != QUIT:
-            region_to_test = menu.get_choice()
+            region_to_test = menu.get_choice()  # calling function get_choice() from menu_functions module
             if region_to_test == HEAD_NECK:
                 muscles = random.sample(head_neck_function.keys(),3)
                 options = head_neck_function[muscles[0]], head_neck_function[muscles[1]], head_neck_function[muscles[2]]

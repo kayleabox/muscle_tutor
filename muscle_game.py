@@ -34,6 +34,8 @@ hand_insertion = {}
 feet_insertion = {}
 hip_insertion = {}
 
+already_asked = []
+
 HEAD_NECK = '1'
 ARM_SHOULDER = '2'
 HAND = '3'
@@ -48,7 +50,6 @@ def main():
     print('would you like to take a quiz about muscles?')
     print('enter any key to continue or q to quit.')
     play = input('> ')
-    selection = 1
     while play != 'q':
 
         menu.menu()
@@ -59,30 +60,37 @@ def main():
                 for muscle in range(0, len(head_neck_function)):
                     muscles, options, question, correct_answer = gen_rand_question(head_neck_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == ARM_SHOULDER:
                 for muscle in range(0, len(arm_function)):
                     muscles, options, question, correct_answer = gen_rand_question(arm_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == HAND:
                 for muscle in range(0, len(hand_function)):
                     muscles, options, question, correct_answer = gen_rand_question(hand_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == THORAX_SPINE:
                 for muscle in range(0, len(thorax_spine_function)):
                     muscles, options, question, correct_answer = gen_rand_question(thorax_spine_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == HIP:
                 for muscle in range(0, len(hip_function)):
                     muscles, options, question, correct_answer = gen_rand_question(hip_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == LEG:
                 for muscle in range(0, len(leg_function)):
                     muscles, options, question, correct_answer = gen_rand_question(leg_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == FOOT:
                 for muscle in range(0, len(feet_function)):
                     muscles, options, question, correct_answer = gen_rand_question(feet_function)
                     ask_question.ask_question(question, options, correct_answer)
+                del already_asked[:]
             elif region_to_test == QUIT:
                 print('goodbye!')
                 exit()
@@ -94,6 +102,11 @@ def gen_rand_question(muscle_dict):
     muscles = random.sample(muscle_dict.keys(), 3)
     options = muscle_dict[muscles[0]], muscle_dict[muscles[1]], muscle_dict[muscles[2]]
     question = random.choice(muscles)
+    while question in already_asked:
+        muscles = random.sample(muscle_dict.keys(), 3)
+        options = muscle_dict[muscles[0]], muscle_dict[muscles[1]], muscle_dict[muscles[2]]
+        question = random.choice(muscles)
+    already_asked.append(question)
     correct_answer = muscle_dict[question]
     return muscles, options, question, correct_answer
 

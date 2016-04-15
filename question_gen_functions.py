@@ -1,3 +1,5 @@
+import random
+
 
 def gen_rand_question(muscle_dict):
     muscles = random.sample(muscle_dict.keys(),3)

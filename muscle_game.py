@@ -1,9 +1,9 @@
 # this program will help the user learn the muscles of the body,
 # their attachments and functions
-import random #why does this not work, is it because random is imported in ask_question_fun
+import random
 import menu_functions as menu
 import ask_question_fun as ask_question
-import question_gen_functions as question_gen # not working either
+
 
 # create the structure of the quiz
 # generate random questions about the muscles in a certain part of the body

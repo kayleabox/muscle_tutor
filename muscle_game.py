@@ -4,11 +4,14 @@ import random
 import menu_functions as menu
 import ask_question_fun as ask_question
 
-
 # create the structure of the quiz
 # generate random questions about the muscles in a certain part of the body
 # use a dictionary to store the questions and answers
 
+#read info from file muscles.xml
+xml_muscles = open ('muscles.xml')
+# for line in xml_muscles:
+#     print (line)
 arm_function = {'biceps brachii': 'flex the elbow', 'deltoid': 'flex shoulder', 'triceps brachii': 'extension of elbow'}
 thorax_spine_function = {'rectus abdominis': 'flex the spine', 'longissimus': 'extension of spine',
                          'multifidi': 'rotate to opposite', 'rotatores': 'rotation to opposite'}
@@ -16,7 +19,7 @@ head_neck_function = {'scm': 'flex neck laterally to same side', 'scalenes': 'el
                       'masseter': 'elevate mandible', 'temporalis': 'elevate mandible'}
 leg_function = {'rectus femorus': '1', 'adductor magnus': '2', 'vastus lat': '3', 'vastus int': '4', 'vastus med': '5',
                 'biceps fem': '6'}
-hand_function = {}
+hand_function = {'7':'7', '6':'6', '5':'5', '3':'6','4':'5', '8':'7' }
 feet_function = {}
 hip_function = {'glute max': '1', 'glute med': '2', 'glute min': '3', 'piriformis': '4', 'quadratus fem': '5'}
 arm_origin = {}
@@ -98,5 +101,6 @@ def main():
             else:
                 print('invalid input. please try again.')
 
+xml_muscles.close()
 
 main()

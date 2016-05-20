@@ -3,6 +3,7 @@
 import random
 import menu_functions as menu
 import ask_question_fun as ask_question
+import xml.etree.cElementTree as ElementTree
 
 # create the structure of the quiz
 # generate random questions about the muscles in a certain part of the body
@@ -10,8 +11,12 @@ import ask_question_fun as ask_question
 
 #read info from file muscles.xml
 xml_muscles = open ('muscles.xml')
-# for line in xml_muscles:
-#     print (line)
+for line in xml_muscles:
+   print (line)
+###xmldict.xml_to_dict()/xmltodict not sure about this module
+tree = ElementTree.parse('muscles.xml')
+#root = tree.getroot()
+#print(root)
 arm_function = {'biceps brachii': 'flex the elbow', 'deltoid': 'flex shoulder', 'triceps brachii': 'extension of elbow'}
 thorax_spine_function = {'rectus abdominis': 'flex the spine', 'longissimus': 'extension of spine',
                          'multifidi': 'rotate to opposite', 'rotatores': 'rotation to opposite'}

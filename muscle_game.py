@@ -15,8 +15,20 @@ for line in xml_muscles:
    print (line)
 ###xmldict.xml_to_dict()/xmltodict not sure about this module
 tree = ElementTree.parse('muscles.xml')
-#root = tree.getroot()
-#print(root)
+root = tree.getroot()
+attribute=root.attrib
+print(root, attribute)
+for child in root:
+    print(child.tag, child.attrib)
+for muscle in root.iter('muscle'):
+    print(muscle.attrib)
+for muscle in root.iter('muscle'):
+    origin = muscle.find('origin').text
+    insertion = muscle.find('insertion').text
+    action = muscle.find('action').text
+    name = muscle.get('name')
+    print("muscle = ", name, "action = ", action, "origin = ", origin, "insertion = ", insertion)
+
 arm_function = {'biceps brachii': 'flex the elbow', 'deltoid': 'flex shoulder', 'triceps brachii': 'extension of elbow'}
 thorax_spine_function = {'rectus abdominis': 'flex the spine', 'longissimus': 'extension of spine',
                          'multifidi': 'rotate to opposite', 'rotatores': 'rotation to opposite'}

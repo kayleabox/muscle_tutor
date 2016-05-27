@@ -20,6 +20,7 @@ def gen_rand_question(muscle_dict, already_asked):
         muscles, options, question = gen_options(muscle_dict)
     already_asked.append(question)
     correct_answer = muscle_dict[question]
+    correct_answer = correct_answer[0]
     ask_question( question,options, correct_answer)
     return muscles, options, question, correct_answer
     """still need to figure out how to make sure answer choices are not duplicates"""
@@ -27,6 +28,7 @@ def gen_rand_question(muscle_dict, already_asked):
 def gen_options(muscle_dict):
     muscles = random.sample(muscle_dict.keys(),3)
     options = muscle_dict[muscles[0]], muscle_dict[muscles[1]], muscle_dict[muscles[2]]
+    options = options[0][0], options[1][0], options[2][0]
     options = list(options)
     question = random.choice(muscles)
     return muscles, options, question

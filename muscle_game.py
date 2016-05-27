@@ -39,44 +39,31 @@ for element in tree.iterfind('thorax_and_spine/muscle[@name="trapezius"]'):
 head_and_neck = {}
 region = 'head_and_neck/muscle'
 xml_functions.fill_dict(head_and_neck, region)
-print(head_and_neck.keys())
-print(head_and_neck.values())
 #create arm dictionary
 arm = {}
 region = 'arm/muscle'
 xml_functions.fill_dict(arm, region)
-print(arm.keys())
-print(arm.values())
 #try to create dictionary thorax_and_spine
 thorax_and_spine={}
 region='thorax_and_spine/muscle'
 xml_functions.fill_dict(thorax_and_spine, region)
-print(thorax_and_spine.keys())
-print(thorax_and_spine.values())
 #create leg dictionary
 leg= {}
 region = 'leg/muscle'
 xml_functions.fill_dict(leg, region)
-print(leg.keys())
-print(leg.values())
 #create hand dictionary
 hand= {}
 region = 'hand/muscle'
 xml_functions.fill_dict(hand, region)
-print(hand.keys())
-print(hand.values())
 #create feet dictionary
 feet= {}
-region = 'feet/muscle'
+region = 'foot/muscle'
 xml_functions.fill_dict(feet, region)
-print(feet.keys())
-print(feet.values())
 #create hip/pelvis dictionary
 pelvis = {}
 region = 'pelvis/muscle'
 xml_functions.fill_dict(pelvis, region)
-print(pelvis.keys())
-print(pelvis.values())
+
 
 dup_option = []
 already_asked = []

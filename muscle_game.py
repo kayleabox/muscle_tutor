@@ -11,30 +11,11 @@ import xml_functions
 
 #read info from file muscles.xml
 xml_muscles = open ('muscles.xml')
-for line in xml_muscles:
-   print (line)
 ###xmldict.xml_to_dict()/xmltodict not sure about this module
 tree = ElementTree.parse('muscles.xml')
 root = tree.getroot()
 attribute=root.attrib
-print(root, attribute)
-for child in root:
-    print(child.tag, child.attrib)
-for muscle in root.iter('muscle'):
-    print(muscle.attrib)
-#finds muscles and there subbranches(origin, insertion, action)
-for muscle in root.iter('muscle'):
-    origin = muscle.find('origin').text
-    insertion = muscle.find('insertion').text
-    action = muscle.find('action').text
-    name = muscle.get('name')
-    print("muscle = ", name, "action = ", action, "origin = ", origin, "insertion = ", insertion)
-#this gets the name of the item
-for element in tree.iterfind('thorax_and_spine/muscle'):
-    print(element.tag, element.attrib)
-#gets specific muscle
-for element in tree.iterfind('thorax_and_spine/muscle[@name="trapezius"]'):
-    print(element.tag, element.attrib)
+
 #head_and_neck dict
 head_and_neck = {}
 region = 'head_and_neck/muscle'
@@ -83,45 +64,46 @@ def main():
     print('enter any key to continue or q to quit.')
     play = input('> ')
     while play != 'q':
-
         menu.menu()
         region_to_test = 0
         while region_to_test != QUIT:
             region_to_test = menu.get_choice()
+            print('would you like to work on action or origin and insertion?')
+            act_org_insrt= input('enter a)action, o)origin, i)insertion.')
+            if act_org_insrt == 'a':
+                act_org_insrt = 'action'
+            elif act_org_insrt == 'o':
+                act_org_insrt = 'origin'
+            elif act_org_insrt == 'i':
+                act_org_insrt = 'insertion'
+
             if region_to_test == HEAD_NECK:
                 for muscle in range(0, len(head_and_neck)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(head_and_neck, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer)
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(head_and_neck, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == ARM_SHOULDER:
                 for muscle in range(0, len(arm)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(arm, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer) # this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(arm, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == HAND:
                 for muscle in range(0, len(hand)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(hand, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer) # this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(hand, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == THORAX_SPINE:
                 for muscle in range(0, len(thorax_and_spine)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(thorax_and_spine, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer)# this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(thorax_and_spine, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == HIP:
                 for muscle in range(0, len(pelvis)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(pelvis, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer) # this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(pelvis, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == LEG:
                 for muscle in range(0, len(leg)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(leg, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer) # this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(leg, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == FOOT:
                 for muscle in range(0, len(feet)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(feet, already_asked)
-                    #ask_question.ask_question(question, options, correct_answer) # this into the gen_rand_question function
+                    muscles, options, question, correct_answer = ask_question.gen_rand_question(feet, act_org_insrt, already_asked)
                 del already_asked[:]
             elif region_to_test == QUIT:
                 print('goodbye!')

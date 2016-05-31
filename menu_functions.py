@@ -10,6 +10,8 @@ def menu():
     print('7)foot\n')
     print('8)quit\n')
 
+
 def get_choice():
     choice = input('what part of the body would you like to work on?')
     return choice
+

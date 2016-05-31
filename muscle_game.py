@@ -68,14 +68,7 @@ def main():
         region_to_test = 0
         while region_to_test != QUIT:
             region_to_test = menu.get_choice()
-            print('would you like to work on action or origin and insertion?')
-            act_org_insrt= input('enter a)action, o)origin, i)insertion.')
-            if act_org_insrt == 'a':
-                act_org_insrt = 'action'
-            elif act_org_insrt == 'o':
-                act_org_insrt = 'origin'
-            elif act_org_insrt == 'i':
-                act_org_insrt = 'insertion'
+            act_org_insrt= menu.get_act_org_insrt()
 
             if region_to_test == HEAD_NECK:
                 for muscle in range(0, len(head_and_neck)):

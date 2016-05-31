@@ -1,10 +1,10 @@
 # this program will help the user learn the muscles of the body,
 # their attachments and functions
-import random
 import menu_functions as menu
 import ask_question_fun as ask_question
 import xml.etree.cElementTree as ElementTree
 import xml_functions
+import keeping_stats
 # create the structure of the quiz
 # generate random questions about the muscles in a certain part of the body
 # use a dictionary to store the questions and answers
@@ -24,7 +24,7 @@ xml_functions.fill_dict(head_and_neck, region)
 arm = {}
 region = 'arm/muscle'
 xml_functions.fill_dict(arm, region)
-#try to create dictionary thorax_and_spine
+#create thorax_and_spine dicitonary
 thorax_and_spine={}
 region='thorax_and_spine/muscle'
 xml_functions.fill_dict(thorax_and_spine, region)
@@ -36,10 +36,10 @@ xml_functions.fill_dict(leg, region)
 hand= {}
 region = 'hand/muscle'
 xml_functions.fill_dict(hand, region)
-#create feet dictionary
-feet= {}
+#create foot dictionary
+foot= {}
 region = 'foot/muscle'
-xml_functions.fill_dict(feet, region)
+xml_functions.fill_dict(foot, region)
 #create hip/pelvis dictionary
 pelvis = {}
 region = 'pelvis/muscle'
@@ -60,50 +60,51 @@ QUIT = '8'
 
 
 def main():
+    correct = 0
+    incorrect = 0
+    total = 0
     print('would you like to take a quiz about muscles?')
     print('enter any key to continue or q to quit.')
     play = input('> ')
     while play != 'q':
-        menu.menu()
         region_to_test = 0
         while region_to_test != QUIT:
+            menu.menu()
             region_to_test = menu.get_choice()
-            act_org_insrt= menu.get_act_org_insrt()
+            if region_to_test != '8':
+                act_org_insrt= menu.get_act_org_insrt()
+            selection = '0'
 
             if region_to_test == HEAD_NECK:
-                for muscle in range(0, len(head_and_neck)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(head_and_neck, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(head_and_neck, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == ARM_SHOULDER:
-                for muscle in range(0, len(arm)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(arm, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(arm, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == HAND:
-                for muscle in range(0, len(hand)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(hand, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(hand, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == THORAX_SPINE:
-                for muscle in range(0, len(thorax_and_spine)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(thorax_and_spine, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(thorax_and_spine, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == HIP:
-                for muscle in range(0, len(pelvis)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(pelvis, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(pelvis, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == LEG:
-                for muscle in range(0, len(leg)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(leg, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(leg, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == FOOT:
-                for muscle in range(0, len(feet)):
-                    muscles, options, question, correct_answer = ask_question.gen_rand_question(feet, act_org_insrt, already_asked)
-                del already_asked[:]
+                correct, incorrect, total = run_quiz(foot, selection, act_org_insrt, correct, incorrect, total)
             elif region_to_test == QUIT:
                 print('goodbye!')
+                if total != 0:
+                    print('you got ', correct, ' correct and ', incorrect, 'incorrect out of', total, '.')
+                keeping_stats.check_stats(correct, incorrect, total)
                 exit()
             else:
                 print('invalid input. please try again.')
 
 xml_muscles.close()
+
+def run_quiz(muscle_dict, selection, act_org_insrt, correct, incorrect, total):
+    for muscle in range(0, len(muscle_dict)):
+        while selection != 'q':
+            selection, correct, incorrect, total = ask_question.gen_rand_question(muscle_dict, act_org_insrt, already_asked, correct, incorrect, total)
+    del already_asked[:]
+    return correct, incorrect, total
 
 main()
